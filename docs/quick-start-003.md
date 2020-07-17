@@ -7,7 +7,7 @@ image: /openshift-kafka/img/img/deployment-config-001.png
 ##  Deploy a debugging container and connect to it
 
 ``` bash
-oc run -it --rm kafka-debug --image=rondinif/openshift-kafka --command -- bash
+oc run -it --rm kafka-debug --image=ashokhin/openshift-kafka --command -- bash
 ```
 let's explain this command: 
 ```
@@ -38,7 +38,7 @@ please note the difference between:
 when the **deploymentconfigs** already exists:
 
 ``` bash 
-$ oc run -it --rm kafka-debug --image=rondinif/openshift-kafka --command -- bash
+$ oc run -it --rm kafka-debug --image=ashokhin/openshift-kafka --command -- bash
 Error from server (AlreadyExists): deploymentconfigs "kafka-debug" already exists
 ```
 ![deployment-config](./img/deployment-config-001.png)

@@ -1,6 +1,6 @@
 
 ``` bash
-$ oc run -it --rm kafka-debug --image=rondinif/openshift-kafka --command -- bash
+$ oc run -it --rm kafka-debug --image=ashokhin/openshift-kafka --command -- bash
 ```
 
 ``` bash

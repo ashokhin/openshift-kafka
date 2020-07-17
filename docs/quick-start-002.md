@@ -5,7 +5,7 @@ description: Load resources Templates, DeploymentConfigs, Services
 # Quick Start Explained ( part 2 of 4)
 ## Load resources (Templates, DeploymentConfigs, Services)
 ```bash
-oc create -f https://raw.githubusercontent.com/rondinif/openshift-kafka/master/resources.yaml
+oc create -f https://raw.githubusercontent.com/ashokhin/openshift-kafka/master/resources.yaml
 ```
 
 ``` yaml
@@ -30,7 +30,7 @@ items:
   - name: IMAGE
     description: Image with Apache Kafka and Apache ZooKeeper
     required: true
-    value: rondinif/openshift-kafka
+    value: ashokhin/openshift-kafka
   objects:
   - apiVersion: v1
     kind: DeploymentConfig
@@ -121,7 +121,7 @@ oc new-app apache-kafka
 
      * With parameters:
         * NAME=apache-kafka
-        * IMAGE=rondinif/openshift-kafka
+        * IMAGE=ashokhin/openshift-kafka
 
 --> Creating resources ...
     deploymentconfig "apache-kafka" created

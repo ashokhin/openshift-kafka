@@ -1,6 +1,6 @@
 # Apache Kafka for OpenShift
-- [GitHub: rondinif/openshift-kafka](https://github.com/rondinif/openshift-kafka)
-- [Docker Hub: rondinif/openshift-kafka](https://hub.docker.com/r/rondinif/openshift-kafka/)
+- [GitHub: ashokhin/openshift-kafka](https://github.com/ashokhin/openshift-kafka)
+- [Docker Hub: ashokhin/openshift-kafka](https://hub.docker.com/r/ashokhin/openshift-kafka/)
 
 
 ## Quick Start Explained

@@ -86,10 +86,10 @@ notare che questo lo ritrovemo nei mounts del container associato al pod *kafka-
 ```
 $ docker ps
 CONTAINER ID        IMAGE                              COMMAND                  CREATED             STATUS              PORTS                                                              NAMES
-b214f360de63        rondinif/openshift-kafka           "bash"                   15 minutes ago      Up 15 minutes                                                                          k8s_kafka-debug_kafka-debug-1-l09l2_myproject_0567948a-91de-11e7-af2e-965306c2f103_0
+b214f360de63        ashokhin/openshift-kafka           "bash"                   15 minutes ago      Up 15 minutes                                                                          k8s_kafka-debug_kafka-debug-1-l09l2_myproject_0567948a-91de-11e7-af2e-965306c2f103_0
 c087ec778ba3        openshift/origin-pod:v3.6.0        "/usr/bin/pod"           15 minutes ago      Up 15 minutes                                                                          k8s_POD_kafka-debug-1-l09l2_myproject_0567948a-91de-11e7-af2e-965306c2f103_0
-561259aae4e6        rondinif/openshift-kafka           "bin/zookeeper-ser..."   About an hour ago   Up About an hour                                                                       k8s_apache-zookeeper_apache-kafka-1-v539g_myproject_d1faecf0-91d4-11e7-af2e-965306c2f103_0
-fb7826400032        rondinif/openshift-kafka           "bin/kafka-server-..."   About an hour ago   Up About an hour                                                                       k8s_apache-kafka_apache-kafka-1-v539g_myproject_d1faecf0-91d4-11e7-af2e-965306c2f103_0
+561259aae4e6        ashokhin/openshift-kafka           "bin/zookeeper-ser..."   About an hour ago   Up About an hour                                                                       k8s_apache-zookeeper_apache-kafka-1-v539g_myproject_d1faecf0-91d4-11e7-af2e-965306c2f103_0
+fb7826400032        ashokhin/openshift-kafka           "bin/kafka-server-..."   About an hour ago   Up About an hour                                                                       k8s_apache-kafka_apache-kafka-1-v539g_myproject_d1faecf0-91d4-11e7-af2e-965306c2f103_0
 e17a618d20a6        openshift/origin-pod:v3.6.0        "/usr/bin/pod"           About an hour ago   Up About an hour                                                                       k8s_POD_apache-kafka-1-v539g_myproject_d1faecf0-91d4-11e7-af2e-965306c2f103_0
 782d1dc9dd54        openshift/origin-docker-registry   "/bin/sh -c '/usr/..."   About an hour ago   Up About an hour                                                                       k8s_registry_docker-registry-1-f8c2g_default_c2567eb3-91d4-11e7-af2e-965306c2f103_0
 b7fce15b4912        openshift/origin-haproxy-router    "/usr/bin/openshif..."   About an hour ago   Up About an hour                                                                       k8s_router_router-1-r5rlt_default_c239b947-91d4-11e7-af2e-965306c2f103_0
@@ -323,7 +323,7 @@ $ docker container inspect b214f360de63
                 "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
             ],
             "Cmd": null,
-            "Image": "rondinif/openshift-kafka@sha256:460c0476aff586aab535363faee4c29a330746d4ce582203951258a2e99ecb9a",
+            "Image": "ashokhin/openshift-kafka@sha256:460c0476aff586aab535363faee4c29a330746d4ce582203951258a2e99ecb9a",
             "Volumes": {
                 "/tmp/kafka-logs": {},
                 "/tmp/zookeeper": {}
