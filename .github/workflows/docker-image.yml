@@ -2,9 +2,8 @@ name: Docker Image CI
 
 on:
   push:
-    branches: [ "test-docker" ]
-  pull_request:
-    branches: [ "test-docker" ]
+    tags:
+      - '[0-9]+.[0-9]+-[0-9]+.[0-9]+.[0-9]+'
 
 jobs:
 

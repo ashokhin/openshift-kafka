@@ -1,4 +1,4 @@
-FROM java:8u111-jdk-alpine
+FROM java:openjdk-8u111-jdk-alpine
 RUN mkdir -p /opt/kafka \
   && apk add --update --no-cache bash curl tar
 WORKDIR /opt/kafka
