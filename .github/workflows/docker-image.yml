@@ -2,8 +2,6 @@ name: Docker Image CI
 
 on:
   push:
-    branches:
-    - 'master'
     tags:
       - '[0-9]+.[0-9]+-[0-9]+.[0-9]+.[0-9]+'
 
@@ -35,5 +33,5 @@ jobs:
         context: .
         file: ./Dockerfile
         push: true
-        tags: ${{ steps.meta.outputs.tags }}
+        tags: ${{ steps.meta.outputs.tags }} , ashokhin/openshift-kafka:latest
         labels: ${{ steps.meta.outputs.labels }}
