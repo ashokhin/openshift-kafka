@@ -25,8 +25,8 @@ jobs:
       id: meta
       uses: docker/metadata-action@v4
       with:
-        images: ashokhin/openshift-kafka
-        
+        images: ${{ secrets.DOCKERHUB_REPO_NAME }}/openshift-kafka
+    
     - name: Build and push Docker image
       uses: docker/build-push-action@v4
       with:
