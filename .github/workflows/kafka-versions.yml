@@ -1,0 +1,62 @@
+name: Kafka-versions-CI
+
+on:
+  schedule:
+    - cron: '5 0 * * *'
+    
+jobs:
+  create_kafka_variable:
+    
+      name: Run Python CI helper
+      runs-on: ubuntu-latest
+
+      steps:
+        - name: Checkout repo
+          uses: actions/checkout@v3
+
+        - name: Run CI helper
+          id: python_helper
+          run: |
+            KAFKA_VERSIONS=$(python ./ci-helpers/find_kafka_versions.py)
+            echo "kafka_versions=${KAFKA_VERSIONS}" >> $GITHUB_OUTPUT
+      outputs: 
+        kafka_versions: ${{ steps.python_helper.outputs.kafka_versions }}
+
+  test01:
+    
+    strategy:
+      matrix:
+        kafka_version_dictionary: ${{ fromJson(needs.create_kafka_variable.outputs.kafka_versions) }}
+    name: Create Kafka tag
+    runs-on: ubuntu-latest
+
+    needs: 
+      - create_kafka_variable
+
+    steps:
+      - name: Checkout repo
+        id: checkout
+        uses: actions/checkout@v3
+        with:
+          token: ${{ secrets.REPO_TOKEN }}
+          fetch-depth: 0
+      
+      - name: Find Kafka versions without Git tags
+        id: git_tags
+        run: |
+          GIT_TAGS_ARRAY=$(python ./ci-helpers/find_git_tags.py)
+          echo "git_tags_array=${GIT_TAGS_ARRAY}" >> $GITHUB_OUTPUT
+      
+      - name: Create Kafka tag if it not exists
+        run: |
+          sed -i "s+https.*\.tgz+${{ matrix.kafka_version_dictionary.download_url }}+g" Dockerfile
+          git add Dockerfile
+        if: ${{ !contains(fromJson(steps.git_tags.outputs.git_tags_array), matrix.kafka_version_dictionary.version) }}
+
+      - name: Commit with tag
+        uses: EndBug/add-and-commit@v9
+        with:
+          message: 'Add version ${{ matrix.kafka_version_dictionary.version }}'
+          tag: '${{ matrix.kafka_version_dictionary.version }} --force'
+          tag_push: '--force'
+        if: ${{ !contains(fromJson(steps.git_tags.outputs.git_tags_array), matrix.kafka_version_dictionary.version) }}
