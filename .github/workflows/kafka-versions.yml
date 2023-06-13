@@ -2,7 +2,7 @@ name: Kafka-versions-CI
 
 on:
   schedule:
-    - cron: '50 * * * *'
+    - cron: '50 5,17 * * *'
     
 jobs:
   create_kafka_variable:
@@ -25,6 +25,7 @@ jobs:
   test01:
     
     strategy:
+      max-parallel: 1
       matrix:
         kafka_version_dictionary: ${{ fromJson(needs.create_kafka_variable.outputs.kafka_versions) }}
     name: Create Kafka tag
