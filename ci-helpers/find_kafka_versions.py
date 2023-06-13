@@ -18,7 +18,7 @@ class Parser(HTMLParser):
             all_data.append(data)
 
 
-def get_http_data(url: str) -> urllib.request._UrlopenRet:
+def get_http_data(url: str):
     try:
         return urllib.request.urlopen(url).read().decode()
     except:
