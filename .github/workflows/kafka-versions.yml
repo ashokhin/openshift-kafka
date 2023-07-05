@@ -2,7 +2,7 @@ name: Kafka-versions-CI
 
 on:
   schedule:
-    - cron: '50 5,17 * * *'
+    - cron: '50 17 * * 1'
     
 jobs:
   create_kafka_variable:
