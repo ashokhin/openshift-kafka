@@ -2,7 +2,7 @@ name: Kafka-versions-CI
 
 on:
   schedule:
-    - cron: '50 17 * * 1'
+    - cron: '10,30,50 2 * * 6'
     
 jobs:
   create_kafka_variable:
@@ -51,7 +51,6 @@ jobs:
       - name: Create Kafka tag if it not exists
         run: |
           sed -i "s+https.*\.tgz+${{ matrix.kafka_version_dictionary.download_url }}+g" Dockerfile
-          git add Dockerfile
         if: ${{ !contains(fromJson(steps.git_tags.outputs.git_tags_array), matrix.kafka_version_dictionary.version) }}
 
       - name: Commit with tag
