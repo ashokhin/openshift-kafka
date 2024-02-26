@@ -63,6 +63,6 @@ jobs:
 
       - name: Wait git sync 30 sec. after commit
         run: |
-          sleep 30
+          sleep 120
         if: ${{ !contains(fromJson(steps.git_tags.outputs.git_tags_array), matrix.kafka_version_dictionary.version) }}
 
