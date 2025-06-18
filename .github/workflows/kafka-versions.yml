@@ -37,9 +37,6 @@ jobs:
         kafka_version_dictionary: ${{ fromJson(needs.create_kafka_variable.outputs.kafka_versions) }}
     name: Create Kafka tag
     runs-on: ubuntu-latest
-    concurrency:
-      group: kafka-tags
-      cancel-in-progress: false
 
     needs: 
       - create_kafka_variable
