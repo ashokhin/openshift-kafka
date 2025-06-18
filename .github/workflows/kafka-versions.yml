@@ -69,5 +69,3 @@ jobs:
           git tag -f ${{ matrix.kafka_version_dictionary.version }} ${{ github.event.inputs.target }}
           git push origin ${{ matrix.kafka_version_dictionary.version}} --force
         if: ${{ !contains(fromJson(steps.git_tags.outputs.git_tags_array), matrix.kafka_version_dictionary.version) }}
-
-
