@@ -61,15 +61,13 @@ jobs:
       
       - name: Create Kafka tag if it not exists
         run: |
+          git pull origin master
           sed -i "s+https.*\.tgz+${{ matrix.kafka_version_dictionary.download_url }}+g" Dockerfile
-        if: ${{ !contains(fromJson(steps.git_tags.outputs.git_tags_array), matrix.kafka_version_dictionary.version) }}
-
-      - name: Commit with tag
-        uses: EndBug/add-and-commit@v9
-        with:
-          message: 'Add version ${{ matrix.kafka_version_dictionary.version }}'
-          tag: '${{ matrix.kafka_version_dictionary.version }} --force'
-          tag_push: '--force'
+          git add .
+          git commit -m "Add version ${{ matrix.kafka_version_dictionary.version }}"
+          git push origin master
+          git tag -f ${{ matrix.kafka_version_dictionary.version }} ${{ github.event.inputs.target }}
+          git push origin ${{ matrix.kafka_version_dictionary.version}} --force
         if: ${{ !contains(fromJson(steps.git_tags.outputs.git_tags_array), matrix.kafka_version_dictionary.version) }}
 
 
