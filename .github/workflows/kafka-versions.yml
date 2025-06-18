@@ -39,7 +39,7 @@ jobs:
     runs-on: ubuntu-latest
     concurrency:
       group: kafka-tags
-      cancel-in-progress: true
+      cancel-in-progress: false
 
     needs: 
       - create_kafka_variable
@@ -72,8 +72,4 @@ jobs:
           tag_push: '--force'
         if: ${{ !contains(fromJson(steps.git_tags.outputs.git_tags_array), matrix.kafka_version_dictionary.version) }}
 
-      - name: Wait git sync 30 sec. after commit
-        run: |
-          sleep 30
-        if: ${{ !contains(fromJson(steps.git_tags.outputs.git_tags_array), matrix.kafka_version_dictionary.version) }}
 
