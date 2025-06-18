@@ -1,10 +1,13 @@
 name: Kafka-versions-CI
 
 on:
+  push:
+    branches: 
+      - "master"
   schedule:
     - cron: '50 17 * * 1'
     
-jobs:
+jobs: 
   create_kafka_variable:
     
       name: Run Python CI helper
@@ -12,7 +15,11 @@ jobs:
 
       steps:
         - name: Checkout repo
-          uses: actions/checkout@v3
+          uses: actions/checkout@v4
+          with:
+            token: ${{ secrets.REPO_TOKEN }}
+            fetch-depth: 0
+            fetch-tags: true
 
         - name: Run CI helper
           id: python_helper
@@ -22,7 +29,7 @@ jobs:
       outputs: 
         kafka_versions: ${{ steps.python_helper.outputs.kafka_versions }}
 
-  test01:
+  create_kafka_matrix_of_tags:
     
     strategy:
       max-parallel: 1
@@ -30,6 +37,9 @@ jobs:
         kafka_version_dictionary: ${{ fromJson(needs.create_kafka_variable.outputs.kafka_versions) }}
     name: Create Kafka tag
     runs-on: ubuntu-latest
+    concurrency:
+      group: kafka-tags
+      cancel-in-progress: true
 
     needs: 
       - create_kafka_variable
@@ -37,10 +47,11 @@ jobs:
     steps:
       - name: Checkout repo
         id: checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           token: ${{ secrets.REPO_TOKEN }}
           fetch-depth: 0
+          fetch-tags: true
       
       - name: Find Kafka versions without Git tags
         id: git_tags
@@ -63,6 +74,6 @@ jobs:
 
       - name: Wait git sync 30 sec. after commit
         run: |
-          sleep 120
+          sleep 30
         if: ${{ !contains(fromJson(steps.git_tags.outputs.git_tags_array), matrix.kafka_version_dictionary.version) }}
 
